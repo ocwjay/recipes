@@ -50,6 +50,12 @@ def register_submission():
 
 @app.route('/login_submission', methods=['POST'])
 def login_submission():
+    if request.form['login_email'] == '':
+        flash("Must enter an email address.", "login")
+        return redirect('/')
+    if request.form['login_password'] == '':
+        flash("Must enter a password.", "login")
+        return redirect('/')
     data = {
         'email' : request.form['login_email']
     }

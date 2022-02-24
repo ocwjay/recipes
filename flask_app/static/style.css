@@ -52,6 +52,7 @@ form label {
     text-decoration: none;
     box-shadow: 4px 4px 2px rgb(0,0,0,.2);
     color: black;
+    cursor: pointer;
 }
 
 .form_btn {
