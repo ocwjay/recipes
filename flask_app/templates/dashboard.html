@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h2 class="nav_header">Welcome {{ session['name'] }}</h2>
+        <div class="navlinks">
+            <ul>
+                <li><a href="/create_recipe" class="btn">Create Recipe</a></li>
+                <li><a href="/logout" class="btn">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h3>Here are the recipes:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Under 30 Minutes?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in all_recipes %}
+                    <tr>
+                        <td>{{ recipe['name'] }}</td>
+                        <td>{{ recipe['under_thirty_minutes'].capitalize() }}</td>
+                        <td class="buttons">
+                            <a href="/recipe/{{ recipe['id'] }}" class="btn list_btn">View</a>
+                            {% if recipe['user_id'] == session['user_id'] %}
+                                <a href="/edit_recipe/{{ recipe['id'] }}" class="btn list_btn">Edit</a>
+                                <a href="/delete/{{ recipe['id'] }}" class="btn list_btn">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

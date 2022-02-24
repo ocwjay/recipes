@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe['name'] }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h2 class="nav_header">{{ recipe['name'] }}</h2>
+        <div class="navlinks">
+            <ul>
+                <li><a href="/dashboard" class="btn">Dashboard</a></li>
+                <li><a href="/logout" class="btn">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h3>Description</h3>
+        <p>{{ recipe['description'] }}</p>
+        <h3>Under 30 Minutes:</h3>
+        <p>{{ recipe['under_thirty_minutes'].capitalize() }}</p>
+        <h3>Instructions:</h3>
+        <p>{{ recipe['instructions'] }}</p>
+        <h3>Date Made:</h3>
+        <p>{{ recipe['date_made_on'] }}</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h2 class="nav_header">Add New Recipe</h2>
+        <div class="navlinks">
+            <ul>
+                <li><a href="/dashboard" class="btn">Dashboard</a></li>
+                <li><a href="/logout" class="btn">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        {% with messages = get_flashed_messages(category_filter=['add_recipe']) %}
+            {% if messages %}
+                <div class="error_box">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form action="/edit_recipe_submission/{{ recipe['id'] }}" method="post" class="form_with_columns">
+            <div class="form_column">
+                <label>
+                    Name:
+                    <input type="text" name="recipe_name" id="recipe_name" value="{{ recipe['name'] }}" class="textbox">
+                </label>
+                <label>
+                    Description:
+                    <textarea name="recipe_description" id="recipe_description" class="textbox">{{ recipe['description'] }}</textarea>
+                </label>
+                <label>
+                    Instructions:
+                    <textarea name="recipe_instructions" id="recipe_instruction" class="textbox">{{ recipe['instructions'] }}</textarea>
+                </label>
+                <input type="submit" value="Edit Recipe" class="btn form_btn add_btn">
+            </div>
+            <div class="form_column">
+                <label>
+                    Date Made:
+                    <input type="date" name="recipe_date_made" id="recipe_date_made" value="{{ recipe['date_made_on'] }}" class="textbox">
+                </label>
+                <p class="under_thirty_p">Under 30 Minutes?</p>
+                <div class="radio_buttons">
+                    <label>
+                        <input type="radio" name="radio" id="radio_yes" value="yes" class="radio_btn">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="radio" id="radio_no" value="no" checked class="radio_btn">
+                        No
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

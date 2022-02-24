@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="column_container">
+        <div class="column">
+            <h2>Register</h2>
+            {% with messages = get_flashed_messages(category_filter=['register']) %}
+                {% if messages %}
+                <div class="error_box">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <form action="/register_submission" method="post">
+                <label>
+                    First Name:
+                    <input type="text" name="fname" id="fname" class="textbox">
+                </label>
+                <label>
+                    Last Name:
+                    <input type="text" name="lname" id="lname" class="textbox">
+                </label>
+                <label>
+                    Email:
+                    <input type="email" name="email" id="email" class="textbox">
+                </label>
+                <label>
+                    Password:
+                    <input type="password" name="password" id="password" class="textbox">
+                </label>
+                <label>
+                    Confirm Password:
+                    <input type="password" name="pass_confirm" id="pass_confirm" class="textbox">
+                </label>
+                <input type="submit" value="Register" class="btn form_btn">
+            </form>
+        </div>
+        <div class="column">
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                <div class="error_box">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <form action="/login_submission" method="post">
+                <label>
+                    Email:
+                    <input type="email" name="login_email" id="login_email" class="textbox">
+                </label>
+                <label>
+                    Password:
+                    <input type="password" name="login_password" id="login_password" class="textbox">
+                </label>
+                <input type="submit" value="Login" class="btn form_btn">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
