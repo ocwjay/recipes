@@ -60,7 +60,7 @@ class Recipe:
         return cls(results[0])
     @classmethod
     def edit_recipe(cls, data):
-        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, date_made_on = %(date_made_on)s, under_thirty_minutes = %(under_thirty_minutes)s, updated_at = NOW() WHERE id = %(id)s"
+        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, instructions = %(instructions)s, date_made_on = %(date_made_on)s, under_thirty_minutes = %(under_thirty_minutes)s, updated_at = NOW() WHERE id = %(id)s"
         results = connectToMySQL('recipes_schema').query_db(query, data)
         return results
     @classmethod
